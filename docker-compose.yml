@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    environment:
+      - VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
+      - VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
+      - VITE_ML_SERVICE_URL=http://ml-service:8000
+    depends_on:
+      - ml-service
+    networks:
+      - shieldmail-net
+
+  ml-service:
+    build:
+      context: ./ml-service
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - ML_SERVICE_HOST=0.0.0.0
+      - ML_SERVICE_PORT=8000
+      - MODEL_ARTIFACTS_DIR=/app/model_artifacts
+      - DEV_DATA_DIR=/app/data/dev
+      - RANDOM_SEED=42
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    volumes:
+      - ml_artifacts:/app/model_artifacts
+      - ml_data:/app/data
+    networks:
+      - shieldmail-net
+
+volumes:
+  ml_artifacts:
+  ml_data:
+
+networks:
+  shieldmail-net:
+    driver: bridge

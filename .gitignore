@@ -1,0 +1,51 @@
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# ML Artifacts (do not commit model binaries)
+ml-service/model_artifacts/*.pkl
+ml-service/model_artifacts/*.pt
+ml-service/model_artifacts/*.pth
+ml-service/model_artifacts/*.bin
+ml-service/model_artifacts/*.joblib
+ml-service/model_artifacts/*.h5
+
+# Private datasets
+ml-service/data/private/
+ml-service/data/raw/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+
+# Logs
+*.log
+logs/
+
+# Docker
+.docker/

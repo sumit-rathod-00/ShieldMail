@@ -1,0 +1,8 @@
+fastapi[standard]
+pandas
+numpy
+scikit-learn
+joblib
+pydantic
+transformers
+torch
