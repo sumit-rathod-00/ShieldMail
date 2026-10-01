@@ -6,6 +6,12 @@ ShieldMail is a research-grade cybersecurity platform for detecting phishing ema
 
 ---
 
+## Repository
+Author: Sumit Rathod
+URL: https://github.com/sumit-rathod-00/ShieldMail
+
+---
+
 ## Architecture
 
 ```text

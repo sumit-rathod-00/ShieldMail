@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/components/errorboundary.tsx","./src/components/scanner/emailscanner.tsx","./src/components/scanner/urlscanner.tsx","./src/pages/landingpage.tsx","./src/pages/user/dashboard.tsx","./src/services/authservice.ts","./src/services/mlservice.ts"],"version":"5.9.3"}
