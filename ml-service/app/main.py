@@ -1,11 +1,25 @@
 # Copyright (c) 2026 ShieldMail Research Team. All rights reserved.
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
 from .preprocessing.email import preprocess_email
 from .features.url import extract_url_features
 
-app = FastAPI(title="ShieldMail ML Service")
+app = FastAPI(
+    title="ShieldMail ML Service",
+    description="AI-Powered Phishing Email & URL Detection Research Platform API",
+    version="2.4.1"
+)
+
+# Enable CORS for frontend integration
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 class EmailScanRequest(BaseModel):
     sender: str
@@ -15,9 +29,23 @@ class EmailScanRequest(BaseModel):
 class URLScanRequest(BaseModel):
     url: str
 
+@app.get("/")
+async def root():
+    return {
+        "service": "ShieldMail ML Service",
+        "status": "online",
+        "version": "v2.4.1",
+        "documentation": "/docs",
+        "health": "/health",
+        "endpoints": {
+            "predict_email": "/predict/email",
+            "predict_url": "/predict/url"
+        }
+    }
+
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy"}
+    return {"status": "healthy", "service": "ShieldMail ML Engine", "version": "v2.4.1"}
 
 @app.post("/predict/email")
 async def predict_email(request: EmailScanRequest):
